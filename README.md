@@ -4,7 +4,7 @@ Repositório público de dados usados pelo cliente MODEX RP para Android. O laun
 
 ## Pacote integrado atual — v2
 
-O pacote público é `modex.data.zip` no release `modexdata-v2`. O manifesto usa o nome interno `modex data`, destino na raiz da pasta de dados e tamanho exato de 759.323.164 bytes. A tela do launcher oculta o nome do arquivo e mantém o progresso/contadores.
+O asset público é [`modex.data.v2.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v2/modex.data.v2.zip) no release `modexdata-v2`. O manifesto usa o nome interno `modex data`, destino na raiz da pasta de dados e tamanho exato de 759.323.164 bytes. A tela do launcher oculta o nome do arquivo e mantém o progresso/contadores.
 
 O ZIP contém 958 arquivos: os 352 arquivos da data base atual, mais 605 PNGs do catálogo de personagens e o marcador de instalação. São 1.773.454.031 bytes expandidos. SHA-256: `58ec5697ffb4601249696faac1a0d3dae8a7e5d60384ea18bc67ef1587d129f2`. A estrutura preserva os caminhos esperados pelo APK, incluindo `customcharacter/textures/`.
 
