@@ -2,20 +2,23 @@
 
 Repositório público de dados usados pelo cliente MODEX RP para Android. O launcher carrega as listas em `data_lists/` e baixa um único pacote ZIP tanto no modo full quanto no lite.
 
-## Pacote integrado
+## Pacote integrado atual — v2
 
-O pacote local foi gerado como `modex data.zip`. Na publicação, o GitHub normalizou o espaço para ponto; o nome efetivo do asset é `modex.data.zip`. O manifesto usa o nome interno `modex data`, portanto o arquivo temporário do APK mantém esse nome, embora a tela de download não o mostre.
+O pacote público é `modex.data.zip` no release `modexdata-v2`. O manifesto usa o nome interno `modex data`, destino na raiz da pasta de dados e tamanho exato de 759.323.164 bytes. A tela do launcher oculta o nome do arquivo e mantém o progresso/contadores.
 
-O ZIP contém 958 arquivos: os 352 arquivos da data base atual, mais 605 PNGs do catálogo de personagens e o marcador de instalação. São 1.773.453.977 bytes expandidos e 758.743.438 bytes compactados. SHA-256: `369c9669f9c4da41b93e47d321343bf6abfa19b2d6bc26ef45b6c9f29f3f3566`. A estrutura preserva os caminhos esperados pelo APK, incluindo `customcharacter/textures/`.
+O ZIP contém 958 arquivos: os 352 arquivos da data base atual, mais 605 PNGs do catálogo de personagens e o marcador de instalação. São 1.773.454.031 bytes expandidos. SHA-256: `58ec5697ffb4601249696faac1a0d3dae8a7e5d60384ea18bc67ef1587d129f2`. A estrutura preserva os caminhos esperados pelo APK, incluindo `customcharacter/textures/`.
 
-O pacote foi construído a partir dos dois assets atuais já publicados e autorizados. Não foram adicionados os 257 PNGs exclusivos do `files.zip` de referência, os DFF/TXD incompatíveis nem os bancos `texdb` divergentes. O conteúdo mantém compatibilidade com SA-MP 0.3.7 e não usa recursos de 0.3.DL.
+## Correção do crash RLE
+
+A v2 corrige somente a cauda comprimida do registro `fist` no banco `texdb/txd/txd`: o fluxo anterior produzia 87.376 bytes, embora o cliente solicitasse 87.408, e terminava exatamente antes dos dois menores blocos de mipmap. A v2 acrescenta uma execução RLE válida usando o último bloco ETC íntegro, atualiza os comprimentos do registro e dos TOCs e valida que o fluxo completo para exatamente no tamanho solicitado. Nenhum outro conteúdo do ZIP foi alterado; `libGTASA.so` permanece byte a byte idêntica.
+
+A comparação com `files.zip` de referência não levou à substituição dos bancos TXD: a entrada `fist` de referência usa outro formato/metadados e não é uma cópia compatível para troca direta. Os PNGs do catálogo de personagens foram preservados.
 
 ## Manifestos e atualização
 
-`data_lists/full_list.json` e `data_lists/lite_list.json` apontam para o mesmo asset em uma única entrada `archives`; `update.json` aponta para os manifestos usando o repositório `windsonlins8520/modexdata`. A entrada do pacote tem destino relativo vazio (raiz da pasta de dados) e tamanho exato de 758.743.438 bytes.
+`data_lists/full_list.json` e `data_lists/lite_list.json` apontam para o mesmo asset em uma única entrada `archives`; `samp_list.json` permanece vazio, portanto não há um segundo pacote de dados. O tamanho diferente da v1 invalida o marcador anterior e faz o launcher baixar a v2 uma vez.
 
-Quem já tem os pacotes anteriores fará uma atualização única do pacote completo, porque o manifesto passa de dois arquivos para um asset integrado. Depois, o marcador do ZIP evita repetir o download enquanto o manifesto e o tamanho permanecerem iguais.
+## Releases
 
-## Release publicado
-
-Tag: [`modexdata-v1`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1). Asset: [`modex.data.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v1/modex.data.zip).
+- v1 preservada: [`modexdata-v1`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1)
+- Atual: [`modexdata-v2`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v2)
