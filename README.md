@@ -11,4 +11,7 @@ The manifest files include both archives in full and lite modes. `update.json` r
 
 ## Status
 
-Repository seed files are prepared locally. Publishing them requires GitHub write permission for repository creation, contents, and release assets.
+The public repository, manifests, and release assets are published. Release URL: https://github.com/windsonlins8520/Nativo.zip/releases/tag/nativo-v1
+
+- `Nativo.zip` SHA-256: `8ac4c967e92a45014281f5f132a2e398e653060fad2c8ccfca25f7ea01def49a`.
+- `Nativo_CustomCharacter_Update.zip` SHA-256: `8bfdf2925dc35f2ee5a1aaaa90c0190c7360ad9619813b8b8eb4ed6309c560d4`.
