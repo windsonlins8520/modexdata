@@ -2,26 +2,29 @@
 
 Repositório público de dados usados pelo cliente MODEX RP para Android. O launcher lê os manifestos em `data_lists/` e baixa um único pacote ZIP tanto no modo full quanto no lite.
 
-## Pacote integrado atual — v3
+## Pacote candidato — v5 (validado localmente; publicação pendente)
 
-O asset público é [`modex.data.v3.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v3/modex.data.v3.zip) no release [`modexdata-v3`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v3). O manifesto usa o nome interno `modex data`, destino na raiz da pasta de dados e tamanho exato de **772.471.627 bytes**. SHA-256: `ddd54ebd2d087abc1934bb3f9416fb73eb824275b1851d2695b57cf799b70519`.
+O candidato é `modex.data.v5.zip`, previsto para a tag `modexdata-v5`. Tamanho exato: **772.487.701 bytes**. SHA-256: `0b751fe3b01094b20a85a2da568860e1c177b7f528d7dbf7db30b5fdc3bffed8`.
 
-O ZIP contém 958 arquivos e 1.773.454.061 bytes expandidos: os dados base do jogo, os PNGs do catálogo de personagens e o marcador de instalação, preservando os caminhos esperados pelo APK, incluindo `customcharacter/textures/`.
+O ZIP mantém os 958 arquivos e os caminhos esperados pelo APK, incluindo `customcharacter/textures/`. Comparado ao pacote v4 local, apenas os três DAT e os três TOCs do banco `texdb/gta3` foram alterados. Os pacotes públicos v1, v2 e v3 permanecem preservados; o v4 local foi substituído por esta candidata mais abrangente e não foi publicado.
 
-## Correções de textura RLE
+## Correções RLE
 
-A v2 corrigiu a cauda comprimida da textura `fist` no banco `texdb/txd/txd`; a v3 mantém essa correção e também corrige a textura `leather_seat` nos bancos `texdb/gta3/gta3.dxt.dat`, `gta3.etc.dat` e `gta3.pvr.dat`. Em cada variante, o fluxo RLE anterior terminava 24 bytes antes do tamanho esperado de 87.400 bytes. A v3 acrescenta uma execução RLE válida e atualiza os comprimentos do registro e os offsets dos TOCs correspondentes.
+A v2 corrigiu a cauda comprimida da textura `fist` no banco `texdb/txd/txd`. A v3 manteve essa correção e reparou `leather_seat` nos bancos `texdb/gta3/gta3.{dxt,etc,pvr}.dat`. A candidata v4 corrigiu `carpet`, identificada no diagnóstico da APK 1.0.78 no offset `0x09F91BB0`.
 
-A validação confirma que o fluxo passa a produzir o tamanho solicitado, que a correção anterior de `fist` continua válida e que o ZIP completo é íntegro. A comparação entre v2 e v3 encontrou alterações somente nos três arquivos DAT e nos três TOCs correspondentes; os outros membros foram preservados.
+Depois da correção de `carpet`, uma auditoria que espelha o limite de destino e o tamanho de bloco de `RLEDecompress` nativo percorreu os **10.367 registros** do banco GTA3. Ela encontrou **1.052 fluxos que não alcançavam a saída de textura solicitada**: 947 terminavam entre blocos completos e 105 acabavam no meio de um token. A candidata v5 preserva os blocos válidos, remove qualquer token final incompleto e completa a cauda com um run RLE válido baseado no último bloco decodificado (ou bloco zero quando não havia bloco anterior).
 
-O ZIP v3 tem 13.148.463 bytes a mais que o v2 por causa da recompressão dos registros modificados; o conteúdo expandido aumentou apenas 30 bytes no total (10 bytes codificados em cada uma das três variantes gráficas).
+Após o reparo, os bancos DXT, ETC e PVR foram auditados novamente: **0 underflows e 0 tokens incompletos** nos 10.367 registros de cada variante. Os 742 casos de arredondamento do último bloco permanecem como comportamento do decodificador nativo quando o tamanho destino não é múltiplo do bloco; não foram classificados como streams curtos. A correção de `fist` continua válida. O ZIP passou no teste de integridade; o reparo adiciona 11.104 bytes de runs RLE e descarta 462 bytes de tokens truncados.
 
-## Manifestos e atualização
+## Manifestos e impacto da atualização
 
-`data_lists/full_list.json` e `data_lists/lite_list.json` apontam para o mesmo asset v3 em uma única entrada `archives`; `samp_list.json` permanece inalterado. A mudança de tamanho invalida o marcador v2 do launcher e solicita a instalação do pacote atualizado uma vez.
+Os manifestos `full_list.json` e `lite_list.json` estão preparados localmente para apontar à mesma candidata v5; `samp_list.json` permanece inalterado. **Eles ainda não foram publicados.** O manifesto público continua apontando para v3, e `update.json` público já declara `game_version` `1.0.78`, conforme autorizado.
+
+Quando publicada, a mudança v3→v5 fará instalações existentes baixarem novamente o pacote completo de aproximadamente **737 MiB** (772.487.701 bytes). O endpoint previsto é `https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v5/modex.data.v5.zip`.
 
 ## Releases
 
 - v1 preservada: [`modexdata-v1`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1)
 - v2 preservada: [`modexdata-v2`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v2)
-- Atual: [`modexdata-v3`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v3)
+- v3 publicada: [`modexdata-v3`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v3)
+- v5: candidata validada localmente, aguardando confirmação para publicação.
