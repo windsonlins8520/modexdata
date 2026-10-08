@@ -1,17 +1,21 @@
-# Nativo — SA-MP 0.3.7 game data and custom character assets
+# MODEX Data — SA-MP 0.3.7
 
-Public data repository for the Nativo Android client. The release assets are downloaded by the launcher through `data_lists/full_list.json` and `data_lists/lite_list.json`.
+Repositório público de dados usados pelo cliente MODEX RP para Android. O launcher carrega as listas em `data_lists/` e baixa um único pacote ZIP tanto no modo full quanto no lite.
 
-## Release assets
+## Pacote integrado
 
-- `Nativo.zip`: copy of the authorized game-data archive; the archive's internal content is preserved. Its launcher display name is `Nativo`.
-- `Nativo_CustomCharacter_Update.zip`: 605 PNG assets for the custom character panel, extracted under `customcharacter/textures/`.
+O pacote local foi gerado como `modex data.zip`. Na publicação, o GitHub normalizou o espaço para ponto; o nome efetivo do asset é `modex.data.zip`. O manifesto usa o nome interno `modex data`, portanto o arquivo temporário do APK mantém esse nome, embora a tela de download não o mostre.
 
-The manifest files include both archives in full and lite modes. `update.json` remains version `17.0` and points to this repository's raw manifests. The custom character system remains SA-MP 0.3.7; no DL-only custom model RPCs are used.
+O ZIP contém 958 arquivos: os 352 arquivos da data base atual, mais 605 PNGs do catálogo de personagens e o marcador de instalação. São 1.773.453.977 bytes expandidos e 758.743.438 bytes compactados. SHA-256: `369c9669f9c4da41b93e47d321343bf6abfa19b2d6bc26ef45b6c9f29f3f3566`. A estrutura preserva os caminhos esperados pelo APK, incluindo `customcharacter/textures/`.
 
-## Status
+O pacote foi construído a partir dos dois assets atuais já publicados e autorizados. Não foram adicionados os 257 PNGs exclusivos do `files.zip` de referência, os DFF/TXD incompatíveis nem os bancos `texdb` divergentes. O conteúdo mantém compatibilidade com SA-MP 0.3.7 e não usa recursos de 0.3.DL.
 
-The public repository, manifests, and release assets are published. Release URL: https://github.com/windsonlins8520/Nativo.zip/releases/tag/nativo-v1
+## Manifestos e atualização
 
-- `Nativo.zip` SHA-256: `8ac4c967e92a45014281f5f132a2e398e653060fad2c8ccfca25f7ea01def49a`.
-- `Nativo_CustomCharacter_Update.zip` SHA-256: `8bfdf2925dc35f2ee5a1aaaa90c0190c7360ad9619813b8b8eb4ed6309c560d4`.
+`data_lists/full_list.json` e `data_lists/lite_list.json` apontam para o mesmo asset em uma única entrada `archives`; `update.json` aponta para os manifestos usando o repositório `windsonlins8520/modexdata`. A entrada do pacote tem destino relativo vazio (raiz da pasta de dados) e tamanho exato de 758.743.438 bytes.
+
+Quem já tem os pacotes anteriores fará uma atualização única do pacote completo, porque o manifesto passa de dois arquivos para um asset integrado. Depois, o marcador do ZIP evita repetir o download enquanto o manifesto e o tamanho permanecerem iguais.
+
+## Release publicado
+
+Tag: [`modexdata-v1`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1). Asset: [`modex.data.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v1/modex.data.zip).
