@@ -2,32 +2,33 @@
 
 Repositório público de dados usados pelo cliente MODEX RP para Android. O launcher lê os manifestos em `data_lists/` e baixa o pacote ZIP nos modos full e lite.
 
-## Pacote atual — v7
+## Pacote atual — v8 nativa
 
-- Download: [`modex.data.v7.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v7/modex.data.v7.zip)
-- Release: [`modexdata-v7`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v7)
-- Tamanho: **775.448.929 bytes** (aprox. 739 MiB)
-- SHA-256: `16273c21a6121c8f9fe90fd1f312f71fbfce292a58f3da53e6d6df4e4570d844`
+- Download: [`modex.data.v8.native.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v8-native/modex.data.v8.native.zip)
+- Release: [`modexdata-v8-native`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v8-native)
+- Tamanho: **617.019.857 bytes** (aprox. 588,5 MiB)
+- SHA-256: `8ac4c967e92a45014281f5f132a2e398e653060fad2c8ccfca25f7ea01def49a`
 
-A v7 restaura skins, HUD, menus, controles e punho para o visual padrão, removendo o velocímetro e as alterações visuais de skins/interfaces. Mantém o mapa escuro/GTA V do minimapa, os mods de veículos e os 606 arquivos de `customcharacter`. Os modelos male/female (`male.dff/.txd` e `female.dff/.txd`) estão no APK, nos slots 7 e 9, e não duplicados neste ZIP.
+A v8 usa a Data-base original (`Nativo.zip`) sem mesclar alterações da v7: não inclui overrides de skins/personagens, veículos modificados, mapa escuro/minimapa GTA V, velocímetro, HUD customizado ou pacote de texturas `customcharacter`. O visual de jogo fica a cargo dos recursos nativos do SA-MP/GTASA.
 
-## Integridade e estabilidade
+## Integridade e compatibilidade
 
-O pacote passou pela verificação integral de CRC do ZIP. Na reconstrução, só foram mantidas caudas RLE do v6 quando os bytes anteriores do registro permaneciam idênticos; isso preserva os reparos de streams sem reaplicar alterações visuais não desejadas. Foram conservados 117 nomes de texturas de veículos, 212 entradas de modelo e os índices do minimapa escuro.
+O ZIP foi conferido integralmente (`unzip -t`) e corresponde byte a byte ao arquivo-base stock disponível no projeto. Isso valida a integridade do arquivo, mas não substitui um teste em dispositivo Android real nem permite garantir ausência de travamentos em toda combinação de aparelho/servidor.
 
-**Ressalva de validação:** o modelo de veículo `tropic.dff`, herdado da Data de origem, não foi modificado. Um parser offline sinalizou EOF ao ler um campo de geometria; isso não comprova falha em execução no jogo, mas o pacote ainda precisa de teste em cliente Android real para certificar o comportamento em runtime.
+O APK DEBUG nativo é distribuído separadamente para instalação manual; não está anexado à release pública da Data. A GameMode permanece inalterada nesta revisão: mensagens, textdraws, diálogos e regras enviados pelo servidor continuam sob responsabilidade da GameMode instalada na host.
 
-## Manifestos e atualização
+## Manifestos
 
-`full_list.json` e `lite_list.json` apontam para a v7. `samp_list.json` permanece sem alteração. `update.json` mantém `game_version` **1.0.78**, correspondente ao `versionName` do APK DEBUG construído; os URLs dos manifestos são estáveis e agora servem a nova lista.
+- `data_lists/full_list.json` e `data_lists/lite_list.json` apontam para a release v8.
+- `data_lists/samp_list.json` permanece sem alteração.
+- `update.json` conserva `game_version` **1.0.78**; o número da versão do launcher não mudou.
 
-O APK universal DEBUG é entregue separadamente e não faz parte desta release do Data. É destinado a teste/instalação manual, não substitui um APK de produção assinado com a chave original do aplicativo.
-
-## Releases preservadas
+## Releases anteriores preservadas
 
 - [v1 — pacote integrado](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1)
 - [v2 — correção RLE de `fist`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v2)
 - [v3 — correção RLE de `leather_seat`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v3)
 - [v5 — correções de streams RLE](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v5)
 - [v6 — validação de bancos mobile/txd](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v6)
-- [v7 — base limpa, mapa escuro e customização preservados](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v7)
+- [v7 — Data com minimapa escuro, veículos e customização](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v7)
+- [v8 — Data stock/nativa](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v8-native)
