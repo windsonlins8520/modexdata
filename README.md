@@ -1,39 +1,37 @@
 # MODEX Data — SA-MP 0.3.7
 
-Repositório público de dados usados pelo cliente MODEX RP para Android. O launcher lê os manifestos em `data_lists/` e baixa o pacote ZIP nos modos full e lite.
+Repositório público dos arquivos de Data usados pelo cliente MODEX RP para Android. O launcher lê os manifestos em `data_lists/` e baixa o pacote ZIP pelos modos full e lite.
 
-## Pacote atual — v9 Creator
+## Versão atual — v10 nativa
 
-- Download: [`modex.data.v9.creator.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v9-creator/modex.data.v9.creator.zip)
-- Release: [`modexdata-v9-creator`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v9-creator)
-- Tamanho: **749.499.435 bytes**
-- SHA-256: `ba99c37af554e3167f9cfbca5eb7e3ef8506b321186015d30af03e5874573d7e`
+- **Download:** [`modex.data.v10.native.zip`](https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v10-native/modex.data.v10.native.zip)
+- **Release:** [MODEX Data v10 — SA-MP nativa](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v10-native)
+- **Tamanho:** 617.019.857 bytes
+- **SHA-256:** `8ac4c967e92a45014281f5f132a2e398e653060fad2c8ccfca25f7ea01def49a`
 
-A v9 usa a Data stock v8 como base e acrescenta somente 503 texturas PNG do catálogo `customcharacter/textures/10` e `customcharacter/textures/14`, para rosto, cabelo, roupas, calçados e corpo. Os arquivos da base v8 foram preservados com CRC/tamanho idênticos. Não foram incluídos os antigos mods de mapa/minimapa, veículos, velocímetro ou HUD.
+A v10 restaura a Data ao baseline nativo (`Nativo.zip`). Seus 352 arquivos têm nomes, tamanhos e CRCs idênticos ao baseline verificado. Não contém os assets customizados do criador nem modificações MODEX de skins, veículos, mapa/minimapa, HUD ou velocímetro.
 
-## Compatibilidade do criador
+A v8 nativa permanece preservada no histórico; a v10 republica o mesmo conteúdo stock sob uma versão nova para que seja a versão atual e os manifests baixem o pacote correto. A v9 Creator e as demais releases antigas são apenas históricas e não são usadas pelos manifests atuais.
 
-A Data v9 é destinada ao APK MODEX Creator v2. O cliente oferece dados de cadastro, escolha de gênero e opções visuais que existem no catálogo instalado. O modelo masculino atualmente não tem opções próprias de cabelo/calçados nesse catálogo; esses controles são mostrados para o modelo feminino. Tatuagens, barba e sobrancelhas do recurso MTA não foram integradas nesta versão: o formato do MTA não é carregado diretamente pelo SA-MP 0.3.7 e requer uma camada de renderização/ativos próprios.
+## Arquivos distribuídos
 
-O APK **não** é distribuído neste repositório; permanece disponível apenas por links diretos de download separados. A GameMode também não é anexada à release da Data.
+- `data_lists/full_list.json` e `data_lists/lite_list.json` apontam para a v10 nativa.
+- `data_lists/samp_list.json` permanece vazio, como antes.
+- `update.json` mantém `game_version` **1.0.78**; a versão do launcher não foi alterada.
 
-## Integridade e compatibilidade
+**Este repositório publica somente a Data.** APKs não são anexados ao GitHub e continuam fora deste repositório. A GameMode não foi modificada nem incluída na release.
 
-O ZIP passou pela verificação CRC integral. A comparação do conteúdo confirma que todos os 352 arquivos da base v8 permanecem inalterados e que os únicos arquivos adicionados são as texturas do criador. Isso verifica a integridade do pacote, mas não substitui um teste em dispositivo Android real nem garante ausência de travamentos em todo aparelho/servidor.
+## Integridade
 
-## Manifestos
+O ZIP passou no teste CRC. A comparação direta confirmou igualdade dos 352 arquivos com o baseline `Nativo.zip` por nome, tamanho e CRC. Isso verifica a correspondência do pacote; não substitui o teste em um aparelho e servidor reais.
 
-- `data_lists/full_list.json` e `data_lists/lite_list.json` apontam para a release v9.
-- `data_lists/samp_list.json` permanece sem alteração.
-- `update.json` conserva `game_version` **1.0.78**; o número da versão do launcher não mudou.
-
-## Releases anteriores preservadas
+## Releases anteriores
 
 - [v1 — pacote integrado](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v1)
 - [v2 — correção RLE de `fist`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v2)
 - [v3 — correção RLE de `leather_seat`](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v3)
 - [v5 — correções de streams RLE](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v5)
 - [v6 — validação de bancos mobile/txd](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v6)
-- [v7 — Data com minimapa escuro, veículos e customização](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v7)
+- [v7 — Data modificada](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v7)
 - [v8 — Data stock/nativa](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v8-native)
-- [v9 — Data stock com assets do criador](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v9-creator)
+- [v9 — Data com assets do criador (histórica)](https://github.com/windsonlins8520/modexdata/releases/tag/modexdata-v9-creator)
