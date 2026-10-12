@@ -2,10 +2,10 @@
   "files": [],
   "archives": [
     {
-      "name": "modex data v11 rle repaired",
+      "name": "MODEX RP Data v1 — com.modexroleplay.online",
       "path": "",
-      "size": 621733199,
-      "url": "https://github.com/windsonlins8520/modexdata/releases/download/modexdata-v11-rle-repaired/MODEX_DATA_v11_NATIVE_RLE_REPAIRED.zip"
+      "size": 1658674296,
+      "url": "https://github.com/windsonlins8520/modexroleplay-data/releases/download/modexroleplay-data-v1/MODEXROLEPLAY_DATA_com.modexroleplay.online.zip"
     }
   ]
 }
